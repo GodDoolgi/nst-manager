@@ -450,7 +450,7 @@ function fcDrag(el,label,hl,drop){let gh=null,tm=null;
  el.addEventListener('touchmove',e=>{if(gh)e.preventDefault()},{passive:false});
  el.addEventListener('contextmenu',e=>e.preventDefault());
  el.onpointerdown=e=>{if(e.button)return;const sx=e.clientX,sy=e.clientY,mouse=e.pointerType==='mouse';gh=null;
-  if(!mouse)tm=setTimeout(()=>{tm=null;begin(sx,sy,e.pointerId)},280);
+  if(!mouse)tm=setTimeout(()=>{tm=null;begin(sx,sy,e.pointerId)},140);
   const mv=m=>{const d=Math.hypot(m.clientX-sx,m.clientY-sy);
    if(!gh){if(mouse){if(d<8)return;begin(m.clientX,m.clientY,e.pointerId)}else{if(d>10&&tm){clearTimeout(tm);tm=null}return}}
    gh.style.left=m.clientX+'px';gh.style.top=m.clientY+'px';unhl();const z=hl(m.clientX,m.clientY);if(z)z.classList.add('fdrop')};
