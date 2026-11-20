@@ -120,41 +120,60 @@ input[type=range]{padding:0}
 .onum.f4{border-color:var(--red);background:var(--redbg)}.onum.fout{opacity:.45;border-style:dashed}
 .fctiles{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
 .fct{background:var(--blk);color:#fff;border-radius:14px;padding:12px;text-align:center;display:flex;flex-direction:column;gap:2px}
-.fct small{font-size:12px;color:#d4d4d8}.fct b{font-size:44px;font-weight:900;line-height:1.05}.fct span{font-size:11px;color:#a1a1aa}
+.fct small{font-size:12px;color:#d4d4d8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.fct b{font-size:44px;font-weight:900;line-height:1.05}.fct span{font-size:11px;color:#a1a1aa}
 .fct.pt{background:#fff;color:var(--ink);border:1px solid var(--line)}.fct.pt small,.fct.pt span{color:var(--sub)}
-.fpgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:8px}
-.fpc{border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px}
-.fph{display:flex;justify-content:space-between;align-items:baseline;gap:6px;margin-bottom:6px}.fph b{font-size:14px;font-weight:800}.fph i{font-style:normal;color:var(--sub);font-size:12px}.fph span{font-size:12px;color:var(--sub);white-space:nowrap}.fph em{font-style:normal;font-size:17px;font-weight:900;color:var(--ink)}.fph u{text-decoration:none;font-weight:800}
+.fct.bonus{background:var(--red)}.fct.bonus span,.fct.bonus small{color:#fff}
+.fqh{margin-bottom:10px}.fq h3 small{font-size:12px;color:var(--sub);font-weight:700}.fbh{margin-top:12px}
+.frow{display:flex;justify-content:center;gap:8px;margin-bottom:8px}
+.fslot{flex:0 1 230px;min-width:0;border-radius:12px}.fslot.fdrop{outline:2px dashed var(--red);outline-offset:2px;background:var(--redbg)}
+.fempty{border:1.5px dashed var(--line);border-radius:12px;min-height:86px;height:100%;display:flex;align-items:center;justify-content:center;color:var(--silver);font-size:12px}
+.fpc{border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px;height:100%}
+.fph{display:flex;justify-content:space-between;align-items:baseline;gap:6px;margin-bottom:6px}.fph b{font-size:14px;font-weight:800;white-space:nowrap}.fph i{font-style:normal;color:var(--sub);font-size:12px}.fph span{font-size:12px;color:var(--sub);white-space:nowrap}.fph em{font-style:normal;font-size:17px;font-weight:900;color:var(--ink)}.fph u{text-decoration:none;font-weight:800}
+.fph b>i:last-child{color:var(--silver);margin-left:2px}
 .fpb{display:grid;grid-template-columns:1fr 1fr 1fr 1.2fr;gap:5px}.fpb button{border:1px solid var(--line);background:var(--soft);border-radius:9px;padding:9px 0;font:inherit;font-weight:800;font-size:14px;cursor:pointer;touch-action:manipulation}.fpb button:active{transform:scale(.95)}.fpb .fl{background:var(--char);border-color:var(--char);color:#fff;font-size:13px}
 .fpc.f4{border-color:var(--red);background:var(--redbg)}.fpc.f4 u{color:var(--red)}.fpc.fout{border-style:dashed;background:var(--silverbg)}.fpc.fout u{color:var(--red)}
-.fph[data-fdrag],.fbc{touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}.fph b>i:last-child{font-size:12px;color:var(--silver);margin-left:2px}
 .fpc.swap{border-color:var(--red);box-shadow:0 0 0 2px var(--redbg)}.fpc.swap .fph b>i:last-child{color:var(--red)}
-.fzone{min-height:54px;border-radius:12px;transition:background .1s}.fzone.fdrop{background:var(--redbg);outline:2px dashed var(--red);outline-offset:3px}.fpc.fdrop{outline:2px solid var(--red)}
-.fcb[data-odrag]{touch-action:none;user-select:none;-webkit-user-select:none}.fcw.fdrop .fcb{outline:2px solid var(--red);background:var(--redbg)}
+.fph[data-fdrag],.fbc,.fcb[data-odrag]{touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.fdragging{opacity:.35}
+.fzone{min-height:40px;border-radius:12px}.fzone.fdrop{background:var(--redbg);outline:2px dashed var(--red);outline-offset:3px}
 .fed{cursor:pointer;border-bottom:1px dashed var(--silver);padding-bottom:1px}
 .fer{display:flex;align-items:center;gap:10px;margin:12px 0}.fer span{width:44px;font-weight:800}.fer button{width:56px;height:56px;border-radius:14px;border:1px solid var(--line);background:var(--soft);font-size:28px;font-weight:800;cursor:pointer;touch-action:manipulation}.fer input{flex:1;min-width:0;text-align:center;font-size:30px;font-weight:900;padding:8px}
 .fbench{display:flex;flex-wrap:wrap;gap:8px}
 .fbc{border:1px solid var(--line);background:#fff;border-radius:11px;padding:8px 12px;font:inherit;display:flex;flex-direction:column;align-items:flex-start;gap:1px}
 .fbc b{font-size:14px;font-weight:800}.fbc b i{font-style:normal;color:var(--sub);font-size:12px}.fbc span{font-size:12px;color:var(--sub)}.fbc u{text-decoration:none;font-weight:800;color:var(--ink)}
 .fbc.sel{border-color:var(--red);background:var(--redbg)}.fbc.f4{border-color:var(--red)}.fbc.f4 u,.fbc.fout u{color:var(--red)}.fbc.fout{border-style:dashed;background:var(--silverbg)}
-.fghost{position:fixed;z-index:999;transform:translate(-50%,-120%);background:var(--blk);color:#fff;padding:8px 14px;border-radius:10px;font-weight:800;font-size:14px;pointer-events:none;box-shadow:0 6px 18px rgba(0,0,0,.25)}
-.fct.bonus{background:var(--red)}
-@media(min-width:700px) and (orientation:portrait){
- .fctiles{gap:14px;margin-bottom:16px}.fct{padding:18px 12px}.fct small{font-size:15px}.fct b{font-size:68px}.fct span{font-size:13px}
- .fpgrid{grid-template-columns:repeat(5,1fr);gap:10px}
- .fpc{padding:12px 10px}.fph{flex-direction:column;align-items:center;gap:4px;margin-bottom:10px}.fph b{font-size:18px}.fph span{font-size:14px}.fph em{font-size:34px}
- .fpb{grid-template-columns:1fr 1fr;gap:8px}.fpb button{padding:18px 0;font-size:21px;border-radius:12px}.fpb .fl{font-size:17px}
- .fbench{gap:10px}.fbc{padding:12px 18px;min-width:118px}.fbc b{font-size:17px}.fbc span{font-size:14px}
- .fcgrid{grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:10px}.fcb{padding:14px 4px}.fcb b{font-size:17px}.fcb em{font-size:19px}.fcb small{font-size:12px}
- .fcw .fcb b{font-size:32px!important}.fcx{font-size:15px;padding:6px}
- #fcIn{font-size:17px;padding:14px}
- .ogrid{grid-template-columns:repeat(5,1fr)}
-}.fct.bonus span,.fct.bonus small{color:#fff}
+.fghost{position:fixed;z-index:999;transform:translate(-50%,-130%);background:var(--blk);color:#fff;padding:8px 14px;border-radius:10px;font-weight:800;font-size:14px;pointer-events:none;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.fopr{margin-bottom:10px;gap:8px;flex-wrap:nowrap}.fopr input{min-width:0}.fopr .fopp{flex:1 1 0;font-weight:800}.fopr #fcIn{flex:1.3 1 0}
 .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
-.fcb{width:100%;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px 4px;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:1px;touch-action:manipulation}
+.fcb{width:100%;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px 4px;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:1px}
 .fcb:active{transform:scale(.96)}.fcb i{font-style:normal;font-size:11px;color:var(--sub)}.fcb b{font-size:14px;font-weight:800}.fcb em{font-style:normal;font-size:15px;font-weight:900}.fcb small{font-size:10px;color:var(--sub)}
 .fcb.f4{border-color:var(--red);background:var(--redbg)}.fcb.f4 em{color:var(--red)}.fcb.fout{border-style:dashed;background:var(--silverbg);color:var(--sub)}
 .fcw{position:relative}.fcx{position:absolute;top:2px;right:2px;border:0;background:none;color:var(--silver);font-size:12px;padding:4px;cursor:pointer}
+.fcw.fdrop .fcb{outline:2px solid var(--red);background:var(--redbg)}
+/* 폰: 한 화면에 코트·벤치·상대가 다 보이게 압축 */
+@media(max-width:699px){
+ .fq .fqh h2,.fq .hint:not(.keep),.fq>.note{display:none}.fq .fqh{margin-bottom:6px;gap:6px}
+ .fq .fctiles{gap:6px;margin-bottom:6px}.fq .fct{padding:5px 4px;border-radius:10px;gap:0}.fq .fct small{font-size:10px}.fq .fct b{font-size:24px}.fq .fct span{display:none}
+ .fq .card{padding:8px;margin-bottom:6px}.fq h3{font-size:13px;margin:0 0 5px}.fq .fbh{margin-top:6px}
+ .fq .frow{gap:5px;margin-bottom:5px}.fq .fslot{flex:0 0 calc((100% - 10px)/3)}.fq .fempty{min-height:98px;font-size:11px}
+ .fq .fpc{padding:5px}.fq .fph{flex-direction:column;align-items:flex-start;gap:0;margin-bottom:4px}.fq .fph b{font-size:13px}.fq .fph span{font-size:11px}.fq .fph em{font-size:14px}
+ .fq .fpb{grid-template-columns:1fr 1fr;gap:4px}.fq .fpb button{padding:7px 0;font-size:13px;border-radius:8px}.fq .fpb .fl{font-size:12px}
+ .fq .fbench{gap:5px}.fq .fbc{padding:5px 8px;flex-direction:row;align-items:baseline;gap:5px;border-radius:9px}.fq .fbc b{font-size:13px}.fq .fbc span{font-size:11px}
+ .fq .fopr{margin-bottom:6px;gap:5px}.fq .fopr input{padding:7px 8px;font-size:13px}.fq .fopr .btn{padding:7px 10px}
+ .fq .ogrid{grid-template-columns:repeat(5,1fr);gap:5px}.fq .fcb{padding:5px 2px;border-radius:9px;gap:0}.fq .fcb>i,.fq .fcb small{display:none}.fq .fcw .fcb b{font-size:17px!important}.fq .fcb em{font-size:12px}.fq .fcx{font-size:10px;padding:2px 3px;top:0;right:0}
+}
+/* 탭 세로: 크게 */
+@media(min-width:700px) and (orientation:portrait){
+ .fctiles{gap:14px;margin-bottom:16px}.fct{padding:16px 12px}.fct small{font-size:15px}.fct b{font-size:64px}.fct span{font-size:13px}
+ .frow{gap:12px;margin-bottom:12px}.fslot{flex:0 0 calc((100% - 24px)/3)}.fempty{min-height:190px;font-size:15px}
+ .fpc{padding:12px 10px}.fph{flex-direction:column;align-items:center;gap:4px;margin-bottom:10px}.fph b{font-size:19px}.fph span{font-size:14px}.fph em{font-size:34px}
+ .fpb{grid-template-columns:1fr 1fr;gap:8px}.fpb button{padding:16px 0;font-size:21px;border-radius:12px}.fpb .fl{font-size:17px}
+ .fbench{gap:10px}.fbc{padding:12px 18px;min-width:118px}.fbc b{font-size:17px}.fbc span{font-size:14px}
+ .fcgrid{gap:10px}.fcb{padding:12px 4px}.fcb em{font-size:19px}.fcb small{font-size:12px}
+ .fcw .fcb b{font-size:32px!important}.fcx{font-size:15px;padding:6px}
+ .fopr input{font-size:17px;padding:13px}
+ .ogrid{grid-template-columns:repeat(5,1fr)}
+}
 .aststrip{background:var(--redbg);border:1px solid #EBC9C4;border-radius:11px;padding:8px;margin-bottom:8px}
 
 .log{max-height:260px;overflow:auto}.log div{display:flex;gap:8px;align-items:center;padding:6px 2px;border-bottom:1px dashed var(--line);font-size:13px}
@@ -413,29 +432,37 @@ function fcCnt(side,id,q){return FC().ev.filter(e=>e.t!=='P'&&e.side===side&&(id
 function fcAdd(side,id){const f=FC();f.ev.push({side,id,q:f.q});save();const n=fcCnt(side,id),tf=fcCnt(side,null,f.q);
  const who=side==='us'?(P(id)||{}).name:(f.opp||'상대')+' #'+id;
  toast(`${who} 파울 ${n}개${n>=FOUL_OUT?' — 퇴장':n===FOUL_OUT-1?' — 4개 주의':''} · 팀파울 ${tf}${tf>=5?' (보너스)':''}`);render()}
-function fcMove(pid,to,target){const f=FC();f.court=f.court||[];const on=f.court.includes(pid);
- if(to==='bench'){if(on)f.court=f.court.filter(x=>x!==pid)}
- else if(!on){if(target&&f.court.includes(target))f.court[f.court.indexOf(target)]=pid;else if(f.court.length<5)f.court.push(pid);else{S.fcPick=pid;toast('코트가 5명이에요 — 바꿀 선수 이름을 탭하세요');render();return}}
+function fcCourt(){const f=FC(),ok=id=>id&&DB.players.some(p=>p.id===id&&p.active);let c=(f.court||[]).slice(0,5).map(id=>ok(id)?id:null);while(c.length<5)c.push(null);f.court=c;return c}
+function fcMove(pid,to,slot){const c=fcCourt(),on=c.indexOf(pid);
+ if(to==='bench'){if(on>=0)c[on]=null}
+ else if(slot!=null){const t=c[slot];if(on>=0)c[on]=t;c[slot]=pid}
+ else if(on<0){const e=c.indexOf(null);if(e>=0)c[e]=pid;else{S.fcPick=pid;toast('코트가 5명이에요 — 바꿀 선수 이름을 탭하세요');render();return}}
  S.fcPick=null;save();render()}
-function fcTap(pid){if(S.fcSkip){S.fcSkip=0;return}const f=FC(),on=(f.court||[]).includes(pid);
- if(on){if(S.fcPick)fcMove(S.fcPick,'court',pid);else fcMove(pid,'bench')}
+function fcTap(pid){if(S.fcSkip){S.fcSkip=0;return}const c=fcCourt(),on=c.indexOf(pid);
+ if(on>=0){if(S.fcPick)fcMove(S.fcPick,'court',on);else fcMove(pid,'bench')}
  else if(S.fcPick===pid){S.fcPick=null;render()}else fcMove(pid,'court')}
-function fcBind(){document.querySelectorAll('[data-fdrag]').forEach(el=>{el.onpointerdown=e=>{if(e.button)return;const pid=el.dataset.fdrag,sx=e.clientX,sy=e.clientY;let gh=null;
-  const mv=m=>{if(!gh){if(Math.hypot(m.clientX-sx,m.clientY-sy)<8)return;gh=document.createElement('div');gh.className='fghost';gh.textContent=(P(pid)||{}).name;document.body.appendChild(gh);try{el.setPointerCapture(e.pointerId)}catch(_){}}
-   gh.style.left=m.clientX+'px';gh.style.top=m.clientY+'px';
-   document.querySelectorAll('.fdrop').forEach(x=>x.classList.remove('fdrop'));const t=document.elementFromPoint(m.clientX,m.clientY);const z=t&&(t.closest('[data-fcard]')||t.closest('[data-fzone]'));if(z)z.classList.add('fdrop')};
-  const up=u=>{el.removeEventListener('pointermove',mv);el.removeEventListener('pointerup',up);el.removeEventListener('pointercancel',up);if(!gh)return;gh.remove();S.fcSkip=1;setTimeout(()=>S.fcSkip=0,60);
-   const t=document.elementFromPoint(u.clientX,u.clientY),card=t&&t.closest('[data-fcard]'),zone=t&&t.closest('[data-fzone]');
-   const on=(FC().court||[]).includes(pid);
-   if(card&&!on)fcMove(pid,'court',FC().court.length>=5?card.dataset.fcard:null);else if(zone&&zone.dataset.fzone==='bench'&&on)fcMove(pid,'bench');else if(zone&&zone.dataset.fzone==='court'&&!on)fcMove(pid,'court');else render()};
-  el.addEventListener('pointermove',mv);el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up)}})}
-function fcOBind(){document.querySelectorAll('[data-odrag]').forEach(el=>{el.onpointerdown=e=>{if(e.button)return;const n=el.dataset.odrag,sx=e.clientX,sy=e.clientY;let gh=null;
-  const mv=m=>{if(!gh){if(Math.hypot(m.clientX-sx,m.clientY-sy)<8)return;gh=document.createElement('div');gh.className='fghost';gh.textContent='#'+n;document.body.appendChild(gh);try{el.setPointerCapture(e.pointerId)}catch(_){}}
-   gh.style.left=m.clientX+'px';gh.style.top=m.clientY+'px';document.querySelectorAll('.fdrop').forEach(x=>x.classList.remove('fdrop'));const t=document.elementFromPoint(m.clientX,m.clientY),c=t&&t.closest('[data-ocard]');if(c&&c.dataset.ocard!==n)c.classList.add('fdrop')};
-  const up=u=>{el.removeEventListener('pointermove',mv);el.removeEventListener('pointerup',up);el.removeEventListener('pointercancel',up);if(!gh)return;gh.remove();S.fcSkip=1;setTimeout(()=>S.fcSkip=0,60);
-   const t=document.elementFromPoint(u.clientX,u.clientY),c=t&&t.closest('[data-ocard]'),f=FC();
-   if(c&&c.dataset.ocard!==n){const a=f.nums.indexOf(n),b=f.nums.indexOf(c.dataset.ocard);if(a>=0&&b>=0){[f.nums[a],f.nums[b]]=[f.nums[b],f.nums[a]];save()}}render()};
-  el.addEventListener('pointermove',mv);el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up)}})}
+function fcSlotTap(i){if(S.fcPick)fcMove(S.fcPick,'court',i)}
+/* 끌기: 마우스=바로, 터치=길게 눌러야 시작 (스크롤과 안 엉키게) */
+function fcDrag(el,label,hl,drop){let gh=null,tm=null;
+ const begin=(x,y,id)=>{gh=document.createElement('div');gh.className='fghost';gh.textContent=label;gh.style.left=x+'px';gh.style.top=y+'px';document.body.appendChild(gh);el.classList.add('fdragging');try{el.setPointerCapture(id)}catch(_){}try{navigator.vibrate&&navigator.vibrate(12)}catch(_){}};
+ const unhl=()=>document.querySelectorAll('.fdrop').forEach(x=>x.classList.remove('fdrop'));
+ el.addEventListener('touchmove',e=>{if(gh)e.preventDefault()},{passive:false});
+ el.addEventListener('contextmenu',e=>e.preventDefault());
+ el.onpointerdown=e=>{if(e.button)return;const sx=e.clientX,sy=e.clientY,mouse=e.pointerType==='mouse';gh=null;
+  if(!mouse)tm=setTimeout(()=>{tm=null;begin(sx,sy,e.pointerId)},280);
+  const mv=m=>{const d=Math.hypot(m.clientX-sx,m.clientY-sy);
+   if(!gh){if(mouse){if(d<8)return;begin(m.clientX,m.clientY,e.pointerId)}else{if(d>10&&tm){clearTimeout(tm);tm=null}return}}
+   gh.style.left=m.clientX+'px';gh.style.top=m.clientY+'px';unhl();const z=hl(m.clientX,m.clientY);if(z)z.classList.add('fdrop')};
+  const up=u=>{el.removeEventListener('pointermove',mv);el.removeEventListener('pointerup',up);el.removeEventListener('pointercancel',up);clearTimeout(tm);tm=null;el.classList.remove('fdragging');unhl();
+   if(!gh)return;gh.remove();gh=null;S.fcSkip=1;setTimeout(()=>S.fcSkip=0,350);if(u.type==='pointerup')drop(u.clientX,u.clientY);else render()};
+  el.addEventListener('pointermove',mv);el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up)}}
+function fcBind(){const at=(x,y,sel)=>{const t=document.elementFromPoint(x,y);return t&&t.closest(sel)};
+ document.querySelectorAll('[data-fdrag]').forEach(el=>{const pid=el.dataset.fdrag;
+  fcDrag(el,(P(pid)||{}).name,(x,y)=>at(x,y,'[data-fslot]')||at(x,y,'[data-fzone="bench"]'),(x,y)=>{const sl=at(x,y,'[data-fslot]'),bz=at(x,y,'[data-fzone="bench"]');
+   if(sl)fcMove(pid,'court',+sl.dataset.fslot);else if(bz&&fcCourt().includes(pid))fcMove(pid,'bench');else render()})});
+ document.querySelectorAll('[data-odrag]').forEach(el=>{const n=el.dataset.odrag;
+  fcDrag(el,'#'+n,(x,y)=>{const c=at(x,y,'[data-ocard]');return c&&c.dataset.ocard!==n?c:null},(x,y)=>{const c=at(x,y,'[data-ocard]'),f=FC();
+   if(c&&c.dataset.ocard!==n){const a=f.nums.indexOf(n),b=f.nums.indexOf(c.dataset.ocard);if(a>=0&&b>=0){[f.nums[a],f.nums[b]]=[f.nums[b],f.nums[a]];save()}}render()})})}
 function fcEdit(side,id){if(S.fcSkip){S.fcSkip=0;return}const f=FC(),us=side==='us',nm=us?(P(id)||{}).name:(f.opp||'상대')+' #'+id;
  const row=(k,lab,v)=>`<div class="fer"><span>${lab}</span><button onclick="fcStep('${k}',-1)">−</button><input id="fe_${k}" inputmode="numeric" value="${v}"><button onclick="fcStep('${k}',1)">+</button></div>`;
  openModal(`<h3>${esc(nm)} 수정</h3>${us?row('P','득점',fcPts(id)):''}${row('F','파울',fcCnt(side,id))}
@@ -454,22 +481,22 @@ function fcDelNum(n){const f=FC();if(fcCnt('opp',n)&&!confirm('#'+n+' 파울 기
 function fcReset(){if(!confirm('간편 기록을 전부 지우고 새로 시작할까요? (상대 번호 포함)'))return;DB.foul={opp:'',q:1,nums:[],ev:[]};save();render()}
 function vFoul(v){const f=FC(),q=f.q,ut=fcCnt('us',null,q),ot=fcCnt('opp',null,q);
  const ps=DB.players.filter(p=>p.active).sort((x,y)=>(+x.num||99)-(+y.num||99)||x.name.localeCompare(y.name));
- f.court=(f.court||[]).filter(id=>ps.some(p=>p.id===id));const ct=f.court.map(P),bn=ps.filter(p=>!f.court.includes(p.id)),pick=S.fcPick&&bn.some(p=>p.id===S.fcPick)?S.fcPick:(S.fcPick=null);
+ const ct=fcCourt(),bn=ps.filter(p=>!ct.includes(p.id)),pick=S.fcPick&&bn.some(p=>p.id===S.fcPick)?S.fcPick:(S.fcPick=null),on=ct.filter(Boolean).length;
  const cls=n=>n>=FOUL_OUT?'fout':n>=FOUL_OUT-1?'f4':'';
  const qd=(side,id)=>[1,2,3,4,5].map(k=>fcCnt(side,id,k)).map((c,i)=>c?`${i<4?i+1+'Q':'OT'} ${c}`:'').filter(Boolean).join(' · ');
  const tile=(nm,n)=>`<div class="fct ${n>=5?'bonus':''}"><small>${esc(nm)} 팀파울</small><b>${n}</b><span>${n>=5?'보너스 · 자유투':'5개부터 보너스'}</span></div>`;
- v.innerHTML=`<div class="row" style="margin-bottom:10px"><h2 style="margin:0">간편 기록</h2><div style="flex:1"></div><button class="btn sm" onclick="fcUndo()">↶ 마지막 취소</button><button class="btn sm" onclick="fcReset()">새로 시작</button></div>
- <div class="row" style="margin-bottom:10px"><span class="hint">쿼터</span>${seg(String(q),{1:'1Q',2:'2Q',3:'3Q',4:'4Q',5:'OT'},'fcQ')}<input placeholder="상대팀 이름" value="${esc(f.opp)}" onchange="FC().opp=this.value.trim();save();render()" style="flex:1;min-width:120px"></div>
+ const slot=i=>{const p=ct[i]?P(ct[i]):null;if(!p)return`<div class="fslot" data-fslot="${i}"><div class="fempty" onclick="fcSlotTap(${i})">빈 자리</div></div>`;
+  const n=fcCnt('us',p.id),pt=fcPts(p.id);return`<div class="fslot" data-fslot="${i}"><div class="fpc ${cls(n)} ${pick?'swap':''}"><div class="fph" data-fdrag="${p.id}" onclick="fcTap('${p.id}')"><b>${p.num!==''?'<i>'+p.num+'</i> ':''}${esc(p.name)} <i>${pick?'⇄':'↓'}</i></b><span class="fed" onclick="event.stopPropagation();fcEdit('us','${p.id}')"><em>${pt}</em>점 · <u>F${n}${n>=FOUL_OUT?' 퇴장':''}</u></span></div><div class="fpb">${[1,2,3].map(k=>`<button onclick="fcPt('${p.id}',${k})">+${k}</button>`).join('')}<button class="fl" onclick="fcAdd('us','${p.id}')">파울</button></div></div></div>`};
+ v.innerHTML=`<div class="fq"><div class="row fqh"><h2 style="margin:0">간편 기록</h2>${seg(String(q),{1:'1Q',2:'2Q',3:'3Q',4:'4Q',5:'OT'},'fcQ')}<div style="flex:1"></div><button class="btn sm" onclick="fcUndo()">↶ 취소</button><button class="btn sm" onclick="fcReset()">새로</button></div>
  <div class="fctiles"><div class="fct pt"><small>NST 득점</small><b>${fcPts()}</b><span>${q<5?q+'Q':'OT'} ${fcPts(null,q)}점</span></div>${tile('NST',ut)}${tile(f.opp||'상대',ot)}</div>
- <div class="card"><h3>코트 <span class="hint">${ct.length}/5 · 이름을 탭하거나 끌어서 벤치로</span></h3>
-  <div class="fpgrid fzone" data-fzone="court">${ct.map(p=>{const n=fcCnt('us',p.id),pt=fcPts(p.id);return`<div class="fpc ${cls(n)} ${pick?'swap':''}" data-fcard="${p.id}"><div class="fph" data-fdrag="${p.id}" onclick="fcTap('${p.id}')"><b>${p.num!==''?'<i>'+p.num+'</i> ':''}${esc(p.name)} <i>${pick?'⇄':'↓'}</i></b><span class="fed" onclick="event.stopPropagation();fcEdit('us','${p.id}')"><em>${pt}</em>점 · <u>F${n}${n>=FOUL_OUT?' 퇴장':''}</u></span></div><div class="fpb">${[1,2,3].map(k=>`<button onclick="fcPt('${p.id}',${k})">+${k}</button>`).join('')}<button class="fl" onclick="fcAdd('us','${p.id}')">파울</button></div></div>`}).join('')||'<span class="hint">벤치에서 뛸 선수 5명을 탭해서 올리세요</span>'}</div>
-  <h3 style="margin-top:14px">벤치 <span class="hint">${pick?`<b style="color:var(--red)">${esc((P(pick)||{}).name)}</b> 들어갈 차례 — 바꿀 코트 선수 이름을 탭 · <a href="#" onclick="S.fcPick=null;render();return false">취소</a>`:'탭하거나 끌어서 코트로'}</span></h3>
-  <div class="fbench fzone" data-fzone="bench">${bn.map(p=>{const n=fcCnt('us',p.id),pt=fcPts(p.id);return`<button class="fbc ${cls(n)} ${pick===p.id?'sel':''}" data-fdrag="${p.id}" onclick="fcTap('${p.id}')"><b>${p.num!==''?'<i>'+p.num+'</i> ':''}${esc(p.name)}</b><span class="fed" onclick="event.stopPropagation();fcEdit('us','${p.id}')">${pt}점 · <u>F${n}${n>=FOUL_OUT?' 퇴장':''}</u></span></button>`}).join('')||'<span class="hint">벤치 없음</span>'}</div></div>
- <div class="card"><h3>${esc(f.opp||'상대팀')} <span class="hint">탭 = 파울 +1 · 끌어서 다른 번호 위에 놓으면 자리 바꿈</span></h3>
-  <div class="row" style="margin-bottom:10px"><input id="fcIn" inputmode="numeric" placeholder="등번호 입력 (여러 개: 4 7 11 23)" style="flex:1;min-width:0" onkeydown="if(event.key==='Enter')fcNums()"><button class="btn pri" onclick="fcNums()">번호 추가</button></div>
-  <div class="fcgrid ogrid">${f.nums.map(n=>{const c=fcCnt('opp',n);return`<div class="fcw" data-ocard="${n}"><button class="fcb ${cls(c)}" data-odrag="${n}" onclick="if(S.fcSkip){S.fcSkip=0;return}fcAdd('opp','${n}')"><i>#</i><b style="font-size:22px">${n}</b><em class="fed" onclick="event.stopPropagation();fcEdit('opp','${n}')">F${c}${c>=FOUL_OUT?' 퇴장':''}</em><small>${qd('opp',n)||'&nbsp;'}</small></button><button class="fcx" onclick="fcDelNum('${n}')">✕</button></div>`}).join('')||'<span class="hint">상대 등번호를 위에 입력해서 추가하세요</span>'}</div></div>
- <p class="note">팀파울은 쿼터마다 따로 세요 (위 쿼터 버튼으로 전환). 득점·개인 파울은 경기 전체 누적이고 파울 5개 = 퇴장이에요. 경기 기록·기록표와는 별개로 저장돼요.</p>`;
- fcBind();fcOBind();
+ <div class="card"><h3>코트 <small>${on}/5</small> <span class="hint">위 2 = 앞선 · 아래 3 = 뒷선 · 이름 탭 = 벤치로 · 길게 눌러 끌기</span></h3>
+  <div class="frow">${slot(0)}${slot(1)}</div><div class="frow">${slot(2)}${slot(3)}${slot(4)}</div>
+  <h3 class="fbh">벤치 ${pick?`<span class="hint keep"><b style="color:var(--red)">${esc((P(pick)||{}).name)}</b> 들어갈 차례 — 바꿀 선수 이름을 탭 · <a href="#" onclick="S.fcPick=null;render();return false">취소</a></span>`:'<span class="hint">탭 = 빈 자리로 · 길게 눌러 원하는 칸에 끌기</span>'}</h3>
+  <div class="fbench fzone" data-fzone="bench">${bn.map(p=>{const n=fcCnt('us',p.id),pt=fcPts(p.id);return`<button class="fbc ${cls(n)} ${pick===p.id?'sel':''}" data-fdrag="${p.id}" onclick="fcTap('${p.id}')"><b>${p.num!==''?'<i>'+p.num+'</i> ':''}${esc(p.name)}</b><span class="fed" onclick="event.stopPropagation();fcEdit('us','${p.id}')">${pt}점 · <u>F${n}${n>=FOUL_OUT?' 퇴장':''}</u></span></button>`}).join('')||'<span class="hint keep">벤치 없음</span>'}</div></div>
+ <div class="card"><div class="row fopr"><input class="fopp" placeholder="상대팀 이름" value="${esc(f.opp)}" onchange="FC().opp=this.value.trim();save();render()"><input id="fcIn" inputmode="numeric" placeholder="등번호 (4 7 11 23)" onkeydown="if(event.key==='Enter')fcNums()"><button class="btn pri" onclick="fcNums()">추가</button></div>
+  <div class="fcgrid ogrid">${f.nums.map(n=>{const c=fcCnt('opp',n);return`<div class="fcw" data-ocard="${n}"><button class="fcb ${cls(c)}" data-odrag="${n}" onclick="if(S.fcSkip){S.fcSkip=0;return}fcAdd('opp','${n}')"><i>#</i><b style="font-size:22px">${n}</b><em class="fed" onclick="event.stopPropagation();fcEdit('opp','${n}')">F${c}${c>=FOUL_OUT?' 퇴장':''}</em><small>${qd('opp',n)||'&nbsp;'}</small></button><button class="fcx" onclick="fcDelNum('${n}')">✕</button></div>`}).join('')||'<span class="hint keep">상대 등번호를 입력해서 추가하세요 · 탭 = 파울 +1</span>'}</div></div>
+ <p class="note">팀파울은 쿼터마다 따로 세요. 득점·개인 파울은 경기 전체 누적이고 파울 5개 = 퇴장이에요. 상대 번호는 길게 눌러 끌면 자리가 바뀌어요.</p></div>`;
+ fcBind();
 }
 function mkChart(id,opt){const el=document.getElementById(id);if(!el||!window.echarts)return;const c=echarts.init(el);
  const ink=css('--ink'),sub=css('--sub'),line=css('--line');
