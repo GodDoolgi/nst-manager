@@ -143,6 +143,7 @@ input[type=range]{padding:0}
 .fbc b{font-size:14px;font-weight:800}.fbc b i{font-style:normal;color:var(--sub);font-size:12px}.fbc span{font-size:12px;color:var(--sub)}.fbc u{text-decoration:none;font-weight:800;color:var(--ink)}
 .fbc.sel{border-color:var(--red);background:var(--redbg)}.fbc.f4{border-color:var(--red)}.fbc.f4 u,.fbc.fout u{color:var(--red)}.fbc.fout{border-style:dashed;background:var(--silverbg)}
 .fghost{position:fixed;z-index:999;transform:translate(-50%,-130%);background:var(--blk);color:#fff;padding:8px 14px;border-radius:10px;font-weight:800;font-size:14px;pointer-events:none;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.flog{display:flex;align-items:center;gap:8px;padding:10px 4px;border-top:1px solid var(--line);cursor:pointer}.flog:first-of-type{border-top:0}
 .fopr{margin-bottom:10px;gap:8px;flex-wrap:nowrap}.fopr input{min-width:0}.fopr .fopp{flex:1 1 0;font-weight:800}.fopr #fcIn{flex:1.3 1 0}
 .fcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
 .fcb{width:100%;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px 4px;font:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:1px}
@@ -152,7 +153,7 @@ input[type=range]{padding:0}
 .fcw.fdrop .fcb{outline:2px solid var(--red);background:var(--redbg)}
 /* 폰: 한 화면에 코트·벤치·상대가 다 보이게 압축 */
 @media(max-width:699px){
- .fq .fqh h2,.fq .hint:not(.keep),.fq>.note{display:none}.fq .fqh{margin-bottom:6px;gap:6px}
+ .fq .fqh h2,.fq .hint:not(.keep),.fq>.note,.fq .fhs{display:none}.fq .flog{padding:7px 2px;font-size:13px}.fq .fqh{margin-bottom:6px;gap:6px}
  .fq .fctiles{gap:6px;margin-bottom:6px}.fq .fct{padding:5px 4px;border-radius:10px;gap:0}.fq .fct small{font-size:10px}.fq .fct b{font-size:24px}.fq .fct span{display:none}
  .fq .card{padding:8px;margin-bottom:6px}.fq h3{font-size:13px;margin:0 0 5px}.fq .fbh{margin-top:6px}
  .fq .frow{gap:5px;margin-bottom:5px}.fq .fslot{flex:0 0 calc((100% - 10px)/3)}.fq .fempty{min-height:98px;font-size:11px}
@@ -474,6 +475,33 @@ function fcEditOk(side,id){const f=FC(),val=k=>{const i=document.getElementById(
  const nf=val('F'),cf=fcCnt(side,id);if(nf>cf)for(let i=0;i<nf-cf;i++)f.ev.push({side,id,q:f.q});else if(nf<cf){const m=e=>e.t!=='P'&&e.side===side&&e.id===id;let d=cf-nf;const inQ=f.ev.filter(e=>m(e)&&e.q===f.q).length,a=Math.min(d,inQ);take(e=>m(e)&&e.q===f.q,a);take(m,d-a)}
  const np=val('P');if(np!=null){const cp=fcPts(id);if(np>cp)f.ev.push({side:'us',id,q:f.q,t:'P',v:np-cp});else if(np<cp){const m=e=>e.t==='P'&&e.id===id;let d=cp-np;const inQ=f.ev.filter(e=>m(e)&&e.q===f.q).reduce((t,e)=>t+e.v,0),a=Math.min(d,inQ);take(e=>m(e)&&e.q===f.q,a,1);take(m,d-a,1)}}
  save();closeModal();toast('수정했어요');render()}
+/* 간편 기록 보관함 */
+function fcSum(r){const ev=r.ev||[],us=ev.filter(e=>e.t==='P').reduce((t,e)=>t+e.v,0);return{us,uf:ev.filter(e=>e.t!=='P'&&e.side==='us').length,of:ev.filter(e=>e.t!=='P'&&e.side==='opp').length}}
+function fcSave(){const f=FC();if(!f.ev.length){toast('저장할 기록이 없어요');return}
+ openModal(`<h3>간편 기록 저장</h3><p class="note" style="margin-top:0">지금 기록을 보관하고, 화면은 비워서 다음 경기를 시작해요.</p>
+ <label class="f">날짜</label><input id="fsDate" type="date" value="${today()}">
+ <label class="f" style="margin-top:8px">상대팀</label><input id="fsOpp" value="${esc(f.opp)}" placeholder="상대팀 이름">
+ <label class="f" style="margin-top:8px">최종 점수 <span class="hint">NST ${fcPts()}점 · 상대 점수는 안 적어도 돼요</span></label><input id="fsScore" inputmode="numeric" placeholder="상대 점수 (선택)">
+ <div class="row" style="margin-top:12px"><button class="btn pri" onclick="fcSaveOk()">저장하고 새 경기</button><button class="btn" onclick="closeModal()">취소</button></div>`)}
+function fcSaveOk(){const f=FC(),sc=document.getElementById('fsScore').value.trim(),names={};f.ev.forEach(e=>{if(e.side==='us'&&P(e.id))names[e.id]=P(e.id).name});
+ (DB.foulLog=DB.foulLog||[]).push({id:uid(),date:document.getElementById('fsDate').value||today(),opp:document.getElementById('fsOpp').value.trim(),oppScore:sc===''||isNaN(+sc)?null:+sc,nums:f.nums.slice(),ev:JSON.parse(JSON.stringify(f.ev)),court:(f.court||[]).slice(),names,savedAt:Date.now()});
+ DB.foul={opp:'',q:1,nums:[],ev:[]};S.fcPick=null;save();closeModal();toast('저장했어요 — 새 경기를 시작하세요');render()}
+function fcView(id){const r=(DB.foulLog||[]).find(x=>x.id===id);if(!r)return;const ev=r.ev,mq=Math.max(4,...ev.map(e=>e.q)),qs=[...Array(mq)].map((_,i)=>i+1),ql=q=>q<5?q+'Q':'OT';
+ const pts=(id,q)=>ev.filter(e=>e.t==='P'&&(id==null||e.id===id)&&(q==null||e.q===q)).reduce((t,e)=>t+e.v,0),fl=(side,id,q)=>ev.filter(e=>e.t!=='P'&&e.side===side&&(id==null||e.id===id)&&(q==null||e.q===q)).length;
+ const ids=[...new Set(ev.filter(e=>e.side==='us').map(e=>e.id))].sort((a,b)=>pts(b)-pts(a)),nm=i=>(P(i)||{}).name||(r.names||{})[i]||'(삭제된 선수)',u=pts(),o=r.oppScore;
+ const nums=[...new Set([...(r.nums||[]),...ev.filter(e=>e.side==='opp').map(e=>e.id)])];
+ openModal(`<div><h3 style="margin-bottom:2px">vs ${esc(r.opp||'상대팀')} ${o!=null?`<span class="tag ${u>o?'rw':u<o?'rl':'rd'}">${u>o?'승':u<o?'패':'무'}</span>`:''}</h3><div class="hint" style="margin-bottom:10px">${r.date} · NST ${u}${o!=null?' : '+o:'점'}</div>
+ <div class="tscroll" style="max-height:none"><table class="sheet"><tr><th class="nm">NST</th>${qs.map(q=>`<th class="c">${ql(q)}</th>`).join('')}<th class="c">득점</th><th class="c">파울</th></tr>
+ ${ids.map(i=>`<tr><td class="nm">${esc(nm(i))}</td>${qs.map(q=>`<td class="c q">${pts(i,q)?`<b>${pts(i,q)}</b>`:''}${fl('us',i,q)?`<s>${'F'.repeat(fl('us',i,q))}</s>`:''}</td>`).join('')}<td class="c"><b>${pts(i)}</b></td><td class="c ${fl('us',i)>=5?'fo':''}">${fl('us',i)}${fl('us',i)>=5?' 퇴장':''}</td></tr>`).join('')}
+ <tr class="tot"><td class="nm"><b>NST 득점</b></td>${qs.map(q=>`<td class="c"><b>${pts(null,q)}</b></td>`).join('')}<td class="c"><b>${u}</b></td><td></td></tr>
+ <tr class="tot"><td class="nm hint">NST 팀파울</td>${qs.map(q=>`<td class="c ${fl('us',null,q)>=5?'fo':''}">${fl('us',null,q)}</td>`).join('')}<td></td><td class="c">${fl('us')}</td></tr>
+ <tr class="tot"><td class="nm hint">상대 팀파울</td>${qs.map(q=>`<td class="c ${fl('opp',null,q)>=5?'fo':''}">${fl('opp',null,q)}</td>`).join('')}<td></td><td class="c">${fl('opp')}</td></tr></table></div>
+ ${nums.length?`<div class="lbl" style="margin-top:12px">${esc(r.opp||'상대팀')} 파울</div><div class="tscroll" style="max-height:none"><table class="sheet"><tr><th class="c">#</th>${qs.map(q=>`<th class="c">${ql(q)}</th>`).join('')}<th class="c">파울</th></tr>${nums.map(n=>`<tr><td class="c"><b>${n}</b></td>${qs.map(q=>`<td class="c q">${fl('opp',n,q)?`<s>${'F'.repeat(fl('opp',n,q))}</s>`:''}</td>`).join('')}<td class="c ${fl('opp',n)>=5?'fo':''}">${fl('opp',n)}${fl('opp',n)>=5?' 퇴장':''}</td></tr>`).join('')}</table></div>`:''}
+ <p class="note">숫자 = 쿼터 득점 · F = 파울</p>
+ <div class="row" style="margin-top:10px"><button class="btn" onclick="fcLoad('${r.id}')">다시 불러와서 고치기</button><button class="btn" onclick="fcDelLog('${r.id}')">삭제</button><div style="flex:1"></div><button class="btn pri" onclick="closeModal()">닫기</button></div></div>`)}
+function fcLoad(id){const L=DB.foulLog||[],r=L.find(x=>x.id===id);if(!r)return;if(FC().ev.length&&!confirm('지금 찍고 있는 기록이 지워져요. 저장된 기록을 불러올까요?'))return;
+ DB.foul={opp:r.opp||'',q:1,nums:(r.nums||[]).slice(),ev:r.ev,court:r.court||[]};DB.foulLog=L.filter(x=>x.id!==id);save();closeModal();toast('불러왔어요 — 고친 뒤 다시 저장하세요');render()}
+function fcDelLog(id){const r=(DB.foulLog||[]).find(x=>x.id===id);if(!r||!confirm(`${r.date} vs ${r.opp||'상대팀'} 기록을 삭제할까요? 되돌릴 수 없어요.`))return;DB.foulLog=DB.foulLog.filter(x=>x.id!==id);save();closeModal();toast('삭제했어요');render()}
 function fcUndo(){const f=FC();if(!f.ev.length){toast('취소할 기록이 없어요');return}const e=f.ev.pop();toast('취소: '+(e.side==='us'?(P(e.id)||{}).name:'상대 #'+e.id)+' '+(e.t==='P'?'+'+e.v:'파울'));save();render()}
 function fcQ(q){FC().q=+q;save();render()}
 function fcNums(){const f=FC(),i=document.getElementById('fcIn'),ns=parseNums(i.value);if(!ns.length){toast('등번호를 입력하세요');return}f.nums=[...new Set([...f.nums,...ns])];save();render();setTimeout(()=>{const x=document.getElementById('fcIn');if(x)x.focus()},30)}
@@ -487,7 +515,7 @@ function vFoul(v){const f=FC(),q=f.q,ut=fcCnt('us',null,q),ot=fcCnt('opp',null,q
  const tile=(nm,n)=>`<div class="fct ${n>=5?'bonus':''}"><small>${esc(nm)} 팀파울</small><b>${n}</b><span>${n>=5?'보너스 · 자유투':'5개부터 보너스'}</span></div>`;
  const slot=i=>{const p=ct[i]?P(ct[i]):null;if(!p)return`<div class="fslot" data-fslot="${i}"><div class="fempty" onclick="fcSlotTap(${i})">빈 자리</div></div>`;
   const n=fcCnt('us',p.id),pt=fcPts(p.id);return`<div class="fslot" data-fslot="${i}"><div class="fpc ${cls(n)} ${pick?'swap':''}"><div class="fph" data-fdrag="${p.id}" onclick="fcTap('${p.id}')"><b>${p.num!==''?'<i>'+p.num+'</i> ':''}${esc(p.name)} <i>${pick?'⇄':'↓'}</i></b><span class="fed" onclick="event.stopPropagation();fcEdit('us','${p.id}')"><em>${pt}</em>점 · <u>F${n}${n>=FOUL_OUT?' 퇴장':''}</u></span></div><div class="fpb">${[1,2,3].map(k=>`<button onclick="fcPt('${p.id}',${k})">+${k}</button>`).join('')}<button class="fl" onclick="fcAdd('us','${p.id}')">파울</button></div></div></div>`};
- v.innerHTML=`<div class="fq"><div class="row fqh"><h2 style="margin:0">간편 기록</h2>${seg(String(q),{1:'1Q',2:'2Q',3:'3Q',4:'4Q',5:'OT'},'fcQ')}<div style="flex:1"></div><button class="btn sm" onclick="fcUndo()">↶ 취소</button><button class="btn sm" onclick="fcReset()">새로</button></div>
+ v.innerHTML=`<div class="fq"><div class="row fqh"><h2 style="margin:0">간편 기록</h2>${seg(String(q),{1:'1Q',2:'2Q',3:'3Q',4:'4Q',5:'OT'},'fcQ')}<div style="flex:1"></div><button class="btn sm" onclick="fcUndo()">↶<span class="fhs"> 취소</span></button><button class="btn sm dk" onclick="fcSave()">저장</button><button class="btn sm" onclick="fcReset()">새로</button></div>
  <div class="fctiles"><div class="fct pt"><small>NST 득점</small><b>${fcPts()}</b><span>${q<5?q+'Q':'OT'} ${fcPts(null,q)}점</span></div>${tile('NST',ut)}${tile(f.opp||'상대',ot)}</div>
  <div class="card"><h3>코트 <small>${on}/5</small> <span class="hint">위 2 = 앞선 · 아래 3 = 뒷선 · 이름 탭 = 벤치로 · 길게 눌러 끌기</span></h3>
   <div class="frow">${slot(0)}${slot(1)}</div><div class="frow">${slot(2)}${slot(3)}${slot(4)}</div>
@@ -495,6 +523,8 @@ function vFoul(v){const f=FC(),q=f.q,ut=fcCnt('us',null,q),ot=fcCnt('opp',null,q
   <div class="fbench fzone" data-fzone="bench">${bn.map(p=>{const n=fcCnt('us',p.id),pt=fcPts(p.id);return`<button class="fbc ${cls(n)} ${pick===p.id?'sel':''}" data-fdrag="${p.id}" onclick="fcTap('${p.id}')"><b>${p.num!==''?'<i>'+p.num+'</i> ':''}${esc(p.name)}</b><span class="fed" onclick="event.stopPropagation();fcEdit('us','${p.id}')">${pt}점 · <u>F${n}${n>=FOUL_OUT?' 퇴장':''}</u></span></button>`}).join('')||'<span class="hint keep">벤치 없음</span>'}</div></div>
  <div class="card"><div class="row fopr"><input class="fopp" placeholder="상대팀 이름" value="${esc(f.opp)}" onchange="FC().opp=this.value.trim();save();render()"><input id="fcIn" inputmode="numeric" placeholder="등번호 (4 7 11 23)" onkeydown="if(event.key==='Enter')fcNums()"><button class="btn pri" onclick="fcNums()">추가</button></div>
   <div class="fcgrid ogrid">${f.nums.map(n=>{const c=fcCnt('opp',n);return`<div class="fcw" data-ocard="${n}"><button class="fcb ${cls(c)}" data-odrag="${n}" onclick="if(S.fcSkip){S.fcSkip=0;return}fcAdd('opp','${n}')"><i>#</i><b style="font-size:22px">${n}</b><em class="fed" onclick="event.stopPropagation();fcEdit('opp','${n}')">F${c}${c>=FOUL_OUT?' 퇴장':''}</em><small>${qd('opp',n)||'&nbsp;'}</small></button><button class="fcx" onclick="fcDelNum('${n}')">✕</button></div>`}).join('')||'<span class="hint keep">상대 등번호를 입력해서 추가하세요 · 탭 = 파울 +1</span>'}</div></div>
+ <div class="card"><h3>저장된 기록 <small>${(DB.foulLog||[]).length}</small> <span class="hint">경기가 끝나면 위 "저장" · 눌러서 보기</span></h3>
+  ${(DB.foulLog||[]).slice().reverse().map(r=>{const u=fcSum(r).us,o=r.oppScore;return`<div class="flog" onclick="fcView('${r.id}')">${o!=null?`<span class="tag ${u>o?'rw':u<o?'rl':'rd'}">${u>o?'승':u<o?'패':'무'}</span>`:''}<b>vs ${esc(r.opp||'상대팀')}</b><span class="hint keep">${r.date}</span><div style="flex:1"></div><b>NST ${u}${o!=null?' : '+o:'점'}</b></div>`}).join('')||'<span class="hint keep">아직 저장된 기록이 없어요</span>'}</div>
  <p class="note">팀파울은 쿼터마다 따로 세요. 득점·개인 파울은 경기 전체 누적이고 파울 5개 = 퇴장이에요. 상대 번호는 길게 눌러 끌면 자리가 바뀌어요.</p></div>`;
  fcBind();
 }
